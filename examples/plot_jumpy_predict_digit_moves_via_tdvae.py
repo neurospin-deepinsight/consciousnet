@@ -233,7 +233,7 @@ train_model(dataloaders, model, device, criterion, optimizer,
 
 #############################################################################
 # Jumpy predictions
-# ----------------
+# -----------------
 #
 # A sequence of digits is fed into the model to see how well it can
 # predict the 4 further images with a time jump of 11 steps.
