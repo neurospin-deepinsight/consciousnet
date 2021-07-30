@@ -239,7 +239,7 @@ train_model(dataloaders, model, device, criterion, optimizer,
 # predict the 4 further images with a time jump of 11 steps.
 
 t1, t2 = 11, 15
-batch_display_size = 6
+batch_display_size = 3
 model.eval()
 idx, (data, _) = next(enumerate(dataloaders["val"]))
 data = data.to(device)
