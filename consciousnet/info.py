@@ -66,7 +66,7 @@ REQUIRES = [
     "scipy>=0.19.1",
     "Pillow>=6.2.1",
     "matplotlib>=3.0.3",
-    "scikit-image==0.15.0",
+    "scikit-image>=0.16.2",
     "torch>=1.8.1",
     "torchvision>=0.9.1"
 ]
