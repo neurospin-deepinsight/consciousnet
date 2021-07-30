@@ -49,7 +49,7 @@ state_size = 8
 t = 16
 d = 4
 add_sigmoid = True
-n_samples = 512
+n_samples = 3 if test else 512
 n_epochs = 3 if test else 4000
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -63,6 +63,11 @@ ds_train = MovingMNISTDataset(
     root=datasetdir, train=True, seq_size=20, shift=1, binary=True)
 ds_val = MovingMNISTDataset(
     root=datasetdir, train=False, seq_size=20, shift=1, binary=True)
+if test:
+    ds_train = torch.utils.data.random_split(
+        ds_train, [100, len(ds_train) - 100])[0]
+    ds_val = torch.utils.data.random_split(
+        ds_val, [100, len(ds_val) - 100])[0]
 datasets = {"train": ds_train, "val": ds_val}
 dataloaders = {x: torch.utils.data.DataLoader(
     datasets[x], batch_size=n_samples, shuffle=True, num_workers=1)
