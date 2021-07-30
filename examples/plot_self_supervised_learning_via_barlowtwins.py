@@ -132,7 +132,10 @@ optimizer = LARS(parameters, lr=0, weight_decay=weight_decay,
                  weight_decay_filter=exclude_bias_and_norm,
                  lars_adaptation_filter=exclude_bias_and_norm)
 start_time = time.time()
-scaler = torch.cuda.amp.GradScaler()
+if device.type == "cpu":
+    scaler = None
+else:
+    scaler = torch.cuda.amp.GradScaler()
 for epoch in range(n_epochs):
     for step, ((y1, y2), _) in enumerate(
             dataloader, start=epoch * len(dataloader)):
@@ -142,12 +145,19 @@ for epoch in range(n_epochs):
                              learning_rate_biases, optimizer, dataloader,
                              step)
         optimizer.zero_grad()
-        with torch.cuda.amp.autocast():
+        if device.type == "cpu":
             loss = model.forward(y1, y2)
-        scaler.scale(loss).backward()
-        scaler.unscale_(optimizer)
-        scaler.step(optimizer)
-        scaler.update()
+        else:
+            with torch.cuda.amp.autocast():
+                loss = model.forward(y1, y2)
+        if scaler is not None:
+            scaler.scale(loss).backward()
+            scaler.unscale_(optimizer)
+            scaler.step(optimizer)
+            scaler.update()
+        else:
+            loss.backward()
+            optimizer.step()
         if step % print_freq == 0:
             stats = dict(epoch=epoch, step=step,
                          lr_weights=optimizer.param_groups[0]["lr"],
@@ -288,7 +298,7 @@ for epoch in range(n_epochs):
         for y, labels in dataloaders["val"]:
             output = model(y.to(device, non_blocking=True))
             acc1, acc5 = accuracy(
-                output, labels.cuda(non_blocking=True), topk=(1, 5))
+                output, labels.to(device, non_blocking=True), topk=(1, 5))
             top1.update(acc1[0].item(), y.size(0))
             top5.update(acc5[0].item(), y.size(0))
     best_acc.top1 = max(best_acc.top1, top1.avg)
