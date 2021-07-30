@@ -61,7 +61,7 @@ This work is made available by a `community of people
 <https://github.com/neurospin-deepinsight/consciousnet/blob/master/AUTHORS.rst>`_, amoung which the
 CEA Neurospin BAOBAB laboratory.
 
-.. image:: ./doc/source/_static/carousel/brain-states.png
+.. image:: ./doc/source/_static/carousel/brain-states.jpg
     :width: 400px
     :align: center
     

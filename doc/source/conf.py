@@ -21,7 +21,6 @@ from unittest.mock import MagicMock
 class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
-        print(cls, name)
         mock = MagicMock()
         mock().get_window_data.return_value = "{}"
         return mock
