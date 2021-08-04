@@ -14,3 +14,4 @@ Common plots.
 # Imports
 from .patterns import plot_spatiotemporal_patterns
 from .reconstruction import plot_reconstruction_error
+from .networks import plot_circo, plot_graph
