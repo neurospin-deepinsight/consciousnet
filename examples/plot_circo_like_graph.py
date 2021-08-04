@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Create the circo-like graphs
-============================
+Create circo-like graphs
+========================
 
 Credit: A Grigis
 
@@ -11,6 +11,7 @@ singularity container. Please install first Singularity.
 
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 from nilearn import datasets
 from nilearn.input_data import NiftiMapsMasker
 from nilearn.connectome import ConnectivityMeasure
@@ -46,6 +47,13 @@ def threshold_adj(adj, threshold):
     adj[np.diag_indices(n_nodes)] = 1.0
 
     return adj
+
+
+def imshow(image_file):
+    image = plt.imread(image_file)
+    fig, ax = plt.subplots()
+    im = ax.imshow(image)
+    ax.axis("off")
 
 
 tmpdir = "/tmp/circo"
@@ -97,12 +105,17 @@ group_colors = [color_map[elem] for elem in group_names]
 circo_file = plot_circo(
     adj=adj, names=names, hemi_groups=hemi_groups, group_names=group_names,
     group_colors=group_colors, outdir=tmpdir, with_labels=False)
+imshow(circo_file)
 print(circo_file)
 circo_file = plot_circo(
     adj=adj, names=names, hemi_groups=hemi_groups, group_names=group_names,
     group_colors=group_colors, outdir=tmpdir, with_labels=True)
 print(circo_file)
+imshow(circo_file)
 graph_file = plot_graph(
     adj=adj, names=names, hemi_groups=hemi_groups, outdir=tmpdir)
 print(graph_file)
+imshow(graph_file)
+
+plt.show()
 

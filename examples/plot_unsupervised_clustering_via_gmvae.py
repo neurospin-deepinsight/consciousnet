@@ -367,6 +367,7 @@ val_acc = GMVAELoss.cluster_acc(
     q_y_given_x.logits, ds_val.labels, is_logits=True)
 print("-- GMVAE ACC val", val_acc)
 
+# sphinx_gallery_thumbnail_number = 3
 for cnt, (name, y, labels, acc) in enumerate((
         ("train", y_train, train_labels, train_acc),
         ("val", y_val, val_labels, val_acc))):

@@ -251,19 +251,19 @@ rollout_data = model.rollout(data, t1, t2)
 images = data.cpu().detach().numpy()
 rollout_images = rollout_data.cpu().detach().numpy()
 fig = plt.figure(0, figsize=(12, 4))
-fig.clf()
 gs = gridspec.GridSpec(batch_display_size, t2 + 2)
 gs.update(wspace = 0.05, hspace = 0.05)
 for i in range(batch_display_size):
     for j in range(t1):
-        axes = plt.subplot(gs[i, j])
-        axes.imshow(1 - images[i, j].reshape(28, 28),
-                    cmap="binary")
-        axes.axis("off")
+        ax = plt.subplot(gs[i, j])
+        ax.imshow(1 - images[i, j].reshape(28, 28),
+                  cmap="binary")
+        ax.axis("off")
     for j in range(t1, t2 + 1):
-        axes = plt.subplot(gs[i, j + 1])
-        axes.imshow(1 - rollout_images[i, j - t1].reshape(28, 28),
-                    cmap="binary")
-        axes.axis("off")
+        ax = plt.subplot(gs[i, j + 1])
+        ax.imshow(1 - rollout_images[i, j - t1].reshape(28, 28),
+                  cmap="binary")
+        ax.axis("off")
+
 plt.show()
 
