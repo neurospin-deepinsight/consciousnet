@@ -179,7 +179,7 @@ def generate_graph(adj, names, hemi_groups, outfile):
         g, pos=pos, vertex_font_size=10, vertex_shape="double_circle",
         vertex_fill_color="#729fcf", vertex_pen_width=3, vertex_text=node_name,
         output_size=(1000, 1000), edge_pen_width=ew, output=outfile,
-        inline=True, bg_color="#FFFFFF")
+        bg_color="#FFFFFF")
 
 
 def plot_chart(chart_name, outdir, simg_file, **kwargs):
@@ -209,8 +209,10 @@ def plot_chart(chart_name, outdir, simg_file, **kwargs):
     code_file = os.path.join(outdir, chart_name + ".py")
     with open(code_file, "wt") as of:
         of.write(code)
-    cmd = "singularity exec --bind {0}:/out {1} python /out/{2}".format(
-        outdir, simg_file, os.path.basename(code_file))
+    cmd = (
+        "singularity exec --no-home --cleanenv --bind {0}:/out {1} "
+        "python /out/{2}".format(
+            outdir, simg_file, os.path.basename(code_file)))
     print("Executing: ", cmd)
     os.system(cmd)
     return outfile
