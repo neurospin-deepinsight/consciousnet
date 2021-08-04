@@ -3,4 +3,4 @@ ipython
 scikit-learn>=0.21.3
 git+https://github.com/neurospin-deepinsight/dataify.git
 git+https://github.com/neurospin-deepinsight/brainite.git
-sphinx==2.2.1
+sphinx==3.5.4

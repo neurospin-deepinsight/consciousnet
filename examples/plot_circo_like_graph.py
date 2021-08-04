@@ -8,6 +8,7 @@ Credit: A Grigis
 All the plots are perfomred with graph-tools embeded in a Singularity
 singularity container. Please install first Singularity.
 """
+# sphinx_gallery_thumbnail_path = '_static/carousel/circo.png'
 
 import os
 import numpy as np
@@ -105,17 +106,12 @@ group_colors = [color_map[elem] for elem in group_names]
 circo_file = plot_circo(
     adj=adj, names=names, hemi_groups=hemi_groups, group_names=group_names,
     group_colors=group_colors, outdir=tmpdir, with_labels=False)
-imshow(circo_file)
 print(circo_file)
 circo_file = plot_circo(
     adj=adj, names=names, hemi_groups=hemi_groups, group_names=group_names,
     group_colors=group_colors, outdir=tmpdir, with_labels=True)
 print(circo_file)
-imshow(circo_file)
 graph_file = plot_graph(
     adj=adj, names=names, hemi_groups=hemi_groups, outdir=tmpdir)
 print(graph_file)
-imshow(graph_file)
-
-plt.show()
 
