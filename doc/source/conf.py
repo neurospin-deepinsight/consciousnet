@@ -86,7 +86,8 @@ sphinx_gallery_conf = {
     "doc_module": "consciousnet",
     "backreferences_dir": os.path.join("consciousnet", "gallery"),
     "examples_dirs": os.path.join(os.pardir, "examples"),
-    "gallery_dirs": "auto_gallery"}
+    "gallery_dirs": "auto_gallery",
+    "reference_url": {"consciousnet": None}}
 
 # Remove some numpy-linked warnings
 numpydoc_show_class_members = False
