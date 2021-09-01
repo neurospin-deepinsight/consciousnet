@@ -194,7 +194,7 @@ def plot_chart(chart_name, outdir, simg_file, **kwargs):
         raise ValueError("Unexpected function name '{0}'.".format(chart_name))
     outfile = os.path.join(
         outdir, chart_name.replace("generate_", "") + ".png")
-    kwargs["outfile"] = outfile
+    kwargs["outfile"] = outfile.replace(outdir, "/out")
     params = ""
     for key, val in kwargs.items():
         if val is None or isinstance(val, bool):
