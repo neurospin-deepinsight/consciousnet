@@ -15,3 +15,5 @@ Common architectures.
 from .tdvae import TDVAE
 from .gmvae import GMVAE, VAEGMP
 from .barlowtwins import BarlowTwins
+from .deepcluster import DeepCluster
+from .brainnetcnn import BrainNetCNN
