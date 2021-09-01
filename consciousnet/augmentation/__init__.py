@@ -13,4 +13,5 @@ Common transforms.
 
 # Imports
 from .barlowtwins import (
-    ContrastiveImageTransform, RandomGaussianBlur, RandomSolarization)
+    ContrastiveConnectomeTransform, ContrastiveImageTransform,
+    RandomConnectionErasing, RandomGaussianBlur, RandomSolarization)
